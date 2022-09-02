@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -13,12 +14,15 @@ public abstract class FileCreator
             using FileStream fs = File.Create(filePath);
             byte[] info = new UTF8Encoding(true).GetBytes(fileText);
             fs.Write(info, 0, info.Length);
-            
-            Console.WriteLine($"{filePath} created!", ConsoleColor.Green);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{filePath} created!");
         }
         else
         {
-            Console.WriteLine($"{filePath} allready exists!", ConsoleColor.Red);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"{filePath} allready exists!");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

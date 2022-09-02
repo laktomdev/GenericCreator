@@ -11,3 +11,4 @@ Console.WriteLine($"parametr: {entityName}");
 
 new ServiceCreator().Create(entityName);
 new ModelsCreator().Create(entityName);
+new TestsCreator().Create(entityName);

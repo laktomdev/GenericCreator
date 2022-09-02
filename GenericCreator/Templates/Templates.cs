@@ -117,6 +117,31 @@ public class {entityName}Service : GenericService<{entityName}Entity, {entityNam
     }}";
     }
 
+    public static string  ModuleTemplate(string entityName)
+    {
+        return $@"using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace DataAccess.Services.{entityName};
+
+public static class {entityName}Module
+{{
+    public static void Register(IServiceCollection services)
+    {{
+        services.AddScoped<I{entityName}Repository, {entityName}Repository>();
+        services.AddScoped<I{entityName}Service, {entityName}Service>();
+
+    }}
+
+    public static void Initialize(IApplicationBuilder app, IWebHostEnvironment env)
+    {{
+        //
+    }}
+}}";
+    }
+
+
     public static string ControllerTemplate(string entityName)
     {
         return $@"using DataAccess.Commons.Controllers;
@@ -138,6 +163,36 @@ public class {entityName}sController : GenericController<{entityName}Entity, {en
 
 
     }}";
+    }
+
+    public static string RepoTestsTemplate(string entityName)
+    {
+        return $@"using DataAccess.Database.Models;
+using RefactoredInfrastructureTests.Bases;
+
+namespace RefactoredInfrastructureTests.RepositoryTests;
+
+
+public class Get{entityName}s : GenericRepositoryTest<{entityName}Entity>
+{{
+    
+}}";
+    }
+
+    public static string ServiceTestsTemplate(string entityName)
+    {
+        return $@"using DataAccess.Database.Models;
+using RefactoredInfrastructureTests.Bases;
+using DataAccess.Dtos;
+
+namespace RefactoredInfrastructureTests.ServicesTests;
+
+
+public class Get{entityName}sWithService : GenericServiceTest<{entityName}Entity, {entityName}Dto>
+{{
+    
+}}
+";
     }
 
 

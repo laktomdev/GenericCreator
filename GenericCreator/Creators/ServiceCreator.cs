@@ -13,6 +13,7 @@ public class ServiceCreator : FileCreator, ICreator
         CreateRepoClass(path, entityName);
         CreateServiceClass(path, entityName);
         CreateServiceInterface(path, entityName);
+        CreateModuleClass(path, entityName);
 
         var controllersPath = Directory.CreateDirectory($"../Diagprog4Api/Controllers/").FullName;
         CreateControllerClass(controllersPath, entityName);
@@ -49,6 +50,15 @@ public class ServiceCreator : FileCreator, ICreator
 
         CreateFile(filePath, classText);
     }
+
+    private void CreateModuleClass(string dirPath, string entityName)
+    {
+        var filePath = Path.Combine(dirPath, $"{entityName}Module.cs");
+        var classText = ModuleTemplate(entityName);
+
+        CreateFile(filePath, classText);
+    }
+
 
     private void CreateControllerClass(string dirPath, string entityName)
     {

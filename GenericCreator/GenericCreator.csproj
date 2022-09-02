@@ -7,7 +7,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>dothings</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
-    <PackageVersion>1.0.8</PackageVersion>
+    <PackageVersion>1.1.1</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
