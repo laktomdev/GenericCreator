@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>dothings</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <PackageVersion>1.0.8</PackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="nupkg\" />
+  </ItemGroup>
+
+</Project>
