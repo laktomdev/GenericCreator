@@ -39,8 +39,30 @@ public class RegisterEntity : LineFinder, IRegistrator
             Console.WriteLine($"Cannot find line matching pattern while register in entity {entityName} in Startup.cs");
         }
 
+        AddStartupUsings(path, entityName);
 
+    }
 
+    private void AddStartupUsings(string path, string entityName)
+    {
+        string pattern = "using.*;";
+        var line = FindLine(path, pattern);
+        if (line > -1)
+        {
+            var usingLine = $"using DataAccess.Services.{entityName};\n";
+
+            var allLines = File.ReadAllLines(path).ToList();
+            allLines.Insert(line, usingLine);
+
+            File.WriteAllLines(path, allLines.ToArray());
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{entityName}Module namespace added to Startup.cs");
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Cannot find line matching pattern while adding namespace in Startup for {entityName}Module in Startup.cs");
+        }
 
     }
 
