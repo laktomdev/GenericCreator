@@ -16,14 +16,14 @@ public class TestsCreator : FileCreator, ICreator
 
     private void CreateServicesTests(string servicesTestsPath, string entityName)
     {
-        var filePath = Path.Combine(servicesTestsPath, $"Get{entityName}s.cs");
+        var filePath = Path.Combine(servicesTestsPath, $"Get{entityName}sWithService.cs");
         var classText = ServiceTestsTemplate(entityName);
         CreateFile(filePath, classText);
     }
 
     private void CreateRepoTests(string repoTestsPath, string entityName)
     {
-        var filePath = Path.Combine(repoTestsPath, $"Get{entityName}sWithService.cs");
+        var filePath = Path.Combine(repoTestsPath, $"Get{entityName}s.cs");
         var classText = RepoTestsTemplate(entityName);
         CreateFile(filePath, classText);
     }
