@@ -62,7 +62,7 @@ public class ServiceCreator : FileCreator, ICreator
 
     private void CreateControllerClass(string dirPath, string entityName)
     {
-        var filePath = Path.Combine(dirPath, $"{entityName}sConroller.cs");
+        var filePath = Path.Combine(dirPath, $"{entityName}sController.cs");
         var classText = ControllerTemplate(entityName);
 
         CreateFile(filePath, classText);
