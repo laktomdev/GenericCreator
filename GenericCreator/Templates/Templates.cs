@@ -76,7 +76,7 @@ namespace DataAccess.Services.{entityName};
 
 public class {entityName}Service : GenericService<{entityName}Entity, {entityName}Dto>, I{entityName}Service
 {{
-    public {entityName}Service(I{entityName}Repository> repository, IMapper mapper, ILogger<{entityName}Service> logger) : base(repository, mapper, logger)
+    public {entityName}Service(I{entityName}Repository repository, IMapper mapper, ILogger<{entityName}Service> logger) : base(repository, mapper, logger)
     {{
     }}
 
