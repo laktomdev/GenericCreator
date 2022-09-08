@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Text.RegularExpressions;
+using static GenericCreator.CreatorConfig;
 
 namespace GenericCreator.Registrators;
 
@@ -12,8 +10,8 @@ public class RegisterEntity : LineFinder, IRegistrator
 
     public void Register(string entityName)
     {
-        RegisterInStartup("../Diagprog4Api/Startup.cs", entityName);
-        RegisterTests("../../tests/RefactoredInfrastructureTests/Tools/MapperFactory.cs", entityName);
+        RegisterInStartup($"{ApiProjectLocation}/Startup.cs", entityName);
+        RegisterTests($"{TestProjectLocation}/Tools/MapperFactory.cs", entityName);
 
     }
 
@@ -90,6 +88,8 @@ public class RegisterEntity : LineFinder, IRegistrator
             Console.WriteLine($"Cannot find line matching pattern while register in entity {entityName} in MapperFactory.cs");
         }
     }
+
+   
 
 
 

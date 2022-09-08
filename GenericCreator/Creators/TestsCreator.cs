@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using static GenericCreator.Templates.Templates;
+using static GenericCreator.CreatorConfig;
 
 namespace GenericCreator.Creators;
 
@@ -8,8 +9,8 @@ public class TestsCreator : FileCreator, ICreator
 
     public void Create(string entityName)
     {
-        var repoTestsPath = Directory.CreateDirectory("../../tests/RefactoredInfrastructureTests/RepositoryTests").FullName;
-        var servicesTestsPath = Directory.CreateDirectory("../../tests/RefactoredInfrastructureTests/ServicesTests").FullName;
+        var repoTestsPath = Directory.CreateDirectory($"{ReposTests}").FullName;
+        var servicesTestsPath = Directory.CreateDirectory($"{ServicesTests}").FullName;
         CreateRepoTests(repoTestsPath, entityName);
         CreateServicesTests(servicesTestsPath, entityName);
     }

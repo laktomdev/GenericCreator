@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using static GenericCreator.CreatorConfig;
 using static GenericCreator.Templates.Templates;
 
 namespace GenericCreator.Creators;
@@ -8,14 +9,14 @@ public class ServiceCreator : FileCreator, ICreator
 {
     public void Create(string entityName)
     {
-        var path = Directory.CreateDirectory($"Services/{entityName}").FullName;
+        var path = Directory.CreateDirectory($"{ServicesLocation}/{entityName}").FullName;
         CreateRepoInterface(path, entityName);
         CreateRepoClass(path, entityName);
         CreateServiceClass(path, entityName);
         CreateServiceInterface(path, entityName);
         CreateModuleClass(path, entityName);
 
-        var controllersPath = Directory.CreateDirectory($"../Diagprog4Api/Controllers/").FullName;
+        var controllersPath = Directory.CreateDirectory($"{ControllersLocation}").FullName;
         CreateControllerClass(controllersPath, entityName);
     }
 

@@ -76,7 +76,7 @@ namespace DataAccess.Services.{entityName};
 
 public class {entityName}Service : GenericService<{entityName}Entity, {entityName}Dto>, I{entityName}Service
 {{
-    public {entityName}Service(IGenericRepository<{entityName}Entity?> repository, IMapper mapper, ILogger<{entityName}Service> logger) : base(repository, mapper, logger)
+    public {entityName}Service(I{entityName}Repository> repository, IMapper mapper, ILogger<{entityName}Service> logger) : base(repository, mapper, logger)
     {{
     }}
 
@@ -194,6 +194,26 @@ public class Get{entityName}sWithService : GenericServiceTest<{entityName}Entity
 }}
 ";
     }
+
+    public static string EntityConfigurationTemplate(string entityName)
+    {
+        return $@"using DataAccess.Database.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace DataAccess.Database.Configuration;
+
+public class {entityName}EntityConfiguration : IEntityTypeConfiguration<{entityName}Entity>
+{{
+        public void Configure(EntityTypeBuilder<{entityName}Entity> builder)
+        {{
+
+        }}
+        }}
+";
+    }
+
+
 
 
 }
