@@ -12,6 +12,21 @@ string entityName = Environment.GetCommandLineArgs()[1];
 var options = Environment.GetCommandLineArgs().Where(x => x.StartsWith('-')).ToList();
 
 
+/*  ALL
+ *  MODELS:  files: [entity, dto, profiles, entityconfiguration]
+ *  SERVICES: files: [services, repositories]
+ *  SERVICES AND CONTROLLERS: files: [services, repositories]
+ *  SERVICES AND MODELS files: [entity, dto, services, repositories, profiles, entityconfiguration]  
+ *  CONTROLLERS: files: [controllers] && register: [Startup]
+ *  TESTS: files: [tests] && register: [MapperFactory]
+ *
+ *
+ *
+ */
+
+//todo: tablename optional parameter
+
+
 
 if (options.Contains("--all") || options.Contains("-all"))
 {
