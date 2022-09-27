@@ -1,7 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
+
+
 
 namespace GenericCreator.Registrators;
 
@@ -28,4 +34,27 @@ public abstract class LineFinder
             return line + 1;
         }
     }
+
+    protected int FindLineAfterCommon(string filePath)
+    {
+
+        if (!File.Exists(filePath))
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"Cannot find file: {filePath}");
+            return -1;
+        }
+        else
+        {
+
+            string[] lines = File.ReadAllLines(filePath);
+
+
+            var line = lines.Select((text, index) => new { text, index }).LastOrDefault(x => x.text.Contains(';'))!.index;
+
+
+            return line + 1;
+        }
+    }
+
 }

@@ -1,7 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System;
-using System.Linq;using GenericCreator;
+using System.Linq;
+using GenericCreator;
 using GenericCreator.Creators;
 using GenericCreator.Registrators;
 
@@ -11,8 +12,6 @@ string entityName = Environment.GetCommandLineArgs()[1];
 var options = Environment.GetCommandLineArgs().Where(x => x.StartsWith('-')).ToList();
 
 
-
-Console.WriteLine($"parametr: {entityName}");
 
 if (options.Contains("--a") || options.Contains("-a"))
 {
@@ -39,7 +38,25 @@ else
     {
         new RegisterEntity().Register(entityName);
     }
+
+    if (options.Contains("--o") || options.Contains("-o"))
+    {
+        if (entityName=="all")
+        {
+            new RegisterAnonymousMapper().Register();
+        }
+        else
+        {
+            Console.WriteLine($"registering anonymous object mapping for {entityName}Dto");
+            new RegisterAnonymousMapper().Register(entityName);
+        }
+    }
+
 }
+
+
+
+
 
 
 
