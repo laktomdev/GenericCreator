@@ -24,10 +24,7 @@ public abstract class LineFinder
         }
         else
         {
-
             string[] lines = File.ReadAllLines(filePath);
-            var qq = lines.Where(x => Regex.Match(x, pattern, RegexOptions.IgnoreCase).Success).ToList();
-
             var line =
                 lines.Select((text, index) => new { text, index }).LastOrDefault(x => Regex.IsMatch(x.text, pattern, RegexOptions.IgnoreCase))!.index;
 
@@ -35,7 +32,7 @@ public abstract class LineFinder
         }
     }
 
-    protected int FindLineAfterCommon(string filePath)
+    protected int FindLineAfterSemicolon(string filePath)
     {
 
         if (!File.Exists(filePath))
@@ -55,6 +52,27 @@ public abstract class LineFinder
 
             return line + 1;
         }
+    }
+
+    protected void AddLineToFile(int lineNumber, string lineToAdd, string filePath)
+    {
+        var formattedLine = $"\t\t{lineToAdd}\n";
+
+        var allLines = File.ReadAllLines(filePath).ToList();
+        allLines.Insert(lineNumber, formattedLine);
+
+        if (allLines.Any(x => x.Contains(lineToAdd)))
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"line: \"{lineToAdd}\" allready exists in {Path.GetFileName(filePath)}");
+            return;
+        }
+
+        File.WriteAllLines(filePath, allLines.ToArray());
+
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"line: \"{lineToAdd}\" successfully added to {Path.GetFileName(filePath)}");
+
     }
 
 }

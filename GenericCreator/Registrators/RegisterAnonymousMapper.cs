@@ -16,7 +16,6 @@ public class RegisterAnonymousMapper : LineFinder
         var path = $"{Directory.GetCurrentDirectory()}\\{ProjectLocation}\\bin\\Debug\\net6.0\\DataAccess.dll";
 
         path = Path.Combine(Directory.GetCurrentDirectory(), ProjectLocation, "bin\\Debug\\net6.0\\DataAccess.dll");
-
         //var path = "E:\\Repos\\Diagprog4Tools\\Diagprog4Infrastructure\\src\\DataAccess\\bin\\Debug\\net6.0\\DataAccess.dll";
 
         var dtos = GetLoadableTypes(Assembly.LoadFile(path)).Where(x => x.FullName.Contains($"Dto"));
@@ -34,8 +33,6 @@ public class RegisterAnonymousMapper : LineFinder
 
         var path = $"{Directory.GetCurrentDirectory()}\\{ProjectLocation}\\bin\\Debug\\net6.0\\DataAccess.dll";
         path = Path.Combine(Directory.GetCurrentDirectory(), ProjectLocation, "bin\\Debug\\net6.0\\DataAccess.dll");
-
-        //var path = "E:\\Repos\\Diagprog4Tools\\Diagprog4Infrastructure\\src\\DataAccess\\bin\\Debug\\net6.0\\DataAccess.dll";
 
 
         var dto = GetLoadableTypes(Assembly.LoadFile(path)).SingleOrDefault(x => x.FullName.Contains($"{entityName}Dto"));
@@ -84,14 +81,10 @@ public class RegisterAnonymousMapper : LineFinder
     public void UpdateFile(string path, string text)
     {
       
-        var line = FindLineAfterCommon(path);
-        var allLines = File.ReadAllLines(path).ToList();
+        var line = FindLineAfterSemicolon(path);
+        AddLineToFile(line, text, path);
 
-
-        allLines.Insert(line, text);
-
-        File.WriteAllLines(path, allLines.ToArray());
-        Console.WriteLine($"File updated: {path}");
+        Console.WriteLine($"File updated: {Path.GetFileName(path)}");
     }
 
     private static IEnumerable<Type> GetLoadableTypes(Assembly assembly)

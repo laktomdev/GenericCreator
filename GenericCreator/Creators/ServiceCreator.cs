@@ -16,8 +16,7 @@ public class ServiceCreator : FileCreator, ICreator
         CreateServiceInterface(path, entityName);
         CreateModuleClass(path, entityName);
 
-        var controllersPath = Directory.CreateDirectory($"{ControllersLocation}").FullName;
-        CreateControllerClass(controllersPath, entityName);
+      
     }
 
     private void CreateServiceClass(string dirPath, string entityName)
@@ -56,15 +55,6 @@ public class ServiceCreator : FileCreator, ICreator
     {
         var filePath = Path.Combine(dirPath, $"{entityName}Module.cs");
         var classText = ModuleTemplate(entityName);
-
-        CreateFile(filePath, classText);
-    }
-
-
-    private void CreateControllerClass(string dirPath, string entityName)
-    {
-        var filePath = Path.Combine(dirPath, $"{entityName}sController.cs");
-        var classText = ControllerTemplate(entityName);
 
         CreateFile(filePath, classText);
     }

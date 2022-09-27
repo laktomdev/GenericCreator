@@ -13,12 +13,18 @@ var options = Environment.GetCommandLineArgs().Where(x => x.StartsWith('-')).ToL
 
 
 
-if (options.Contains("--a") || options.Contains("-a"))
+if (options.Contains("--all") || options.Contains("-all"))
 {
+    if (entityName.ToLower() == "all")
+    {
+        Console.WriteLine("You have to use this command for every entity separately.");
+    }
     new ServiceCreator().Create(entityName);
+    new ControllerCreator().Create(entityName);
+
     new ModelsCreator().Create(entityName);
     new TestsCreator().Create(entityName);
-    new RegisterEntity().Register(entityName);
+    new StartupRegistrator().Register(entityName);
 }
 else
 {
@@ -36,10 +42,10 @@ else
     }
     if (options.Contains("--r") || options.Contains("-r"))
     {
-        new RegisterEntity().Register(entityName);
+        new StartupRegistrator().Register(entityName);
     }
 
-    if (options.Contains("--o") || options.Contains("-o"))
+    if (options.Contains("--obj") || options.Contains("-obj"))
     {
         if (entityName=="all")
         {
